@@ -1,9 +1,7 @@
 package br.com.challange.videos.videos.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Video {
@@ -14,6 +12,9 @@ public class Video {
 	private String titulo;
 	private String descricao;
 	private String url;
+
+	@ManyToMany
+	private List<Categoria> categoria;
 
 	public Long getId() {
 		return id;

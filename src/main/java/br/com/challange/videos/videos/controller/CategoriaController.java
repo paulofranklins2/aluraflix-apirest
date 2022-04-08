@@ -1,8 +1,12 @@
 package br.com.challange.videos.videos.controller;
 
 import br.com.challange.videos.videos.controller.dto.CategoriaDto;
+import br.com.challange.videos.videos.controller.dto.VideoDto;
+import br.com.challange.videos.videos.form.AtualizacaoCategoriaForm;
+import br.com.challange.videos.videos.form.AtualizacaoVideoForm;
 import br.com.challange.videos.videos.form.CategoriaForm;
 import br.com.challange.videos.videos.model.Categoria;
+import br.com.challange.videos.videos.model.Video;
 import br.com.challange.videos.videos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -42,6 +46,13 @@ public class CategoriaController extends ResponseEntityExceptionHandler {
         categoria = categoriaRepository.save(categoria);
         URI uri = uriBuilder.path("/categoria/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CategoriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoCategoriaForm form) {
+        Categoria categoria = form.atualizar(id, categoriaRepository);
+        return ResponseEntity.ok(new CategoriaDto(categoria));
     }
 
     @DeleteMapping("/{id}")

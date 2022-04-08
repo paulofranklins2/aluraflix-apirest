@@ -52,10 +52,12 @@ public class Video {
 
 	}
 
-	public Video(String titulo, String descricao, String url) {
+	public Video(String titulo, String descricao, String ur) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.url = url;
+
+
 	}
 
 }

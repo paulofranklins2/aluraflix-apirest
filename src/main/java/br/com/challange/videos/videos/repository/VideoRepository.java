@@ -7,13 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import br.com.challange.videos.videos.model.Video;
 
-@Repository											// ENTITY E TIPO DO ID
+@Repository                                            // ENTITY E TIPO DO ID
 public interface VideoRepository extends JpaRepository<Video, Long> {
 
-
-	List<Video> findByTitulo(String titulo);
-
-	List<Video> findByDescricao(String descricao);
-	
-
+    List<Video> findByCategoriaId(Long id);
 }

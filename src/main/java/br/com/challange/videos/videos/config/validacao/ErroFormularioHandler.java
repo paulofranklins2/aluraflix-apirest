@@ -19,19 +19,20 @@ public class ErroFormularioHandler {
     @Autowired
     private MessageSource messageSource;
 
+
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ErroFormularioDto> handle(MethodArgumentNotValidException exception) {
-        List<ErroFormularioDto> dto = new ArrayList<>();
+    public List<ErroFormularioDto> erroFormularioDtos(MethodArgumentNotValidException exception) {
+        List<ErroFormularioDto> erroFormularioDtos = new ArrayList<ErroFormularioDto>();
 
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         fieldErrors.forEach(e -> {
-            String menssagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            ErroFormularioDto erro = new ErroFormularioDto(e.getField(), menssagem);
-            dto.add(erro);
+            String mensagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
+            ErroFormularioDto erroFormularioDto = new ErroFormularioDto(e.getField(), mensagem);
+            erroFormularioDtos.add(erroFormularioDto);
         });
 
-        return dto;
+        return erroFormularioDtos;
     }
 
 }

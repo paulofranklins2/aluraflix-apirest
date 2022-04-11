@@ -8,13 +8,22 @@ import javax.validation.constraints.Size;
 
 public class CategoriaForm {
 
+
     @NotEmpty
     @Size(min = 5)
     private String titulo;
+
     @NotEmpty
     @Size(min = 6)
     private String color;
 
+    public Categoria converter(CategoriaRepository categoriaRepository) {
+        return new Categoria(titulo, color);
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -24,14 +33,7 @@ public class CategoriaForm {
         return color;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public Categoria converter(CategoriaRepository categoriaRepository) {
-        return new Categoria(titulo, color);
     }
 }

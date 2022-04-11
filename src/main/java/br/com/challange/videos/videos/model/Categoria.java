@@ -2,7 +2,6 @@ package br.com.challange.videos.videos.model;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Categoria {

@@ -18,6 +18,7 @@ public class AtualizacaoCategoriaForm {
     public String getTitulo() {
         return titulo;
     }
+
     public String getColor() {
         return color;
     }
@@ -30,8 +31,8 @@ public class AtualizacaoCategoriaForm {
         this.color = color;
     }
 
-    public Categoria atualizar (Long id, CategoriaRepository categoriaRepository){
-        Categoria  categoria = categoriaRepository.getOne(id);
+    public Categoria atualizar(Long id, CategoriaRepository categoriaRepository) {
+        Categoria categoria = categoriaRepository.getOne(id);
         categoria.setTitulo(this.titulo);
         categoria.setColor(this.color);
         return categoria;

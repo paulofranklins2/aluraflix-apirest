@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base::head}"></head>
+<body>
+
+<div th:replace="~{base::logo}"></div>
+<!--<div th:replace="~{base::nave}"></div>-->
+<div class="container">
+    <div class="card mt-3">
+        <form th:action="@{/user/delete}" th:object="${deleteForm}" class="card-body" method="post">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input th:field="*{id}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="id"/>
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

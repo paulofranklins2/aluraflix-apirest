@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
@@ -22,18 +24,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/videos/free").permitAll()
+                    .antMatchers("/home").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .httpBasic();
-
-//                .formLogin()
-//                    .loginPage("/login")
-//                    .permitAll()
-//                    .and()
-//                .logout()
-//                    .permitAll();
-//
+//                    .httpBasic();
+                .formLogin( form -> form.loginPage("/login")
+                    .defaultSuccessUrl("/home",true)
+                    .permitAll())
+                .logout(logout -> {
+                    logout.logoutUrl("/logout").logoutSuccessUrl("/home");
+                });
     }
 
     @Override
@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                      Criar usuario inicial.
 //        UserDetails user =
 //                User.builder()
-//                        .username("paulo")
-//                        .password(bCryptPasswordEncoder.encode("paulo"))
+//                        .username("hugo")
+//                        .password(bCryptPasswordEncoder.encode("hugo"))
 //                        .roles("ADM")
 //                        .build();
 

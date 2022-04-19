@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base::head}"></head>
+<body>
+
+<div th:replace="~{base::logo}"></div>
+<!--<div th:replace="~{base::nave}"></div>-->
+
+
+<div class="container">
+    <div class="card mb-3" th:each="video : ${video}">
+        <div class="card-header alert alert-dark" th:text="${video.titulo}">ID video
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-12 mb-3">
+                    <div>Video Synopsis</div>
+                    <div>
+                        <input disabled class="form-control" th:value="${video.descricao}"
+                               value="Video Synopsis"/>
+                    </div>
+
+                    <div>Video Url</div>
+                    <div>
+                        <input disabled class="form-control" th:value="${video.url}"
+                               value="Video Url"/>
+                    </div>
+                    <div>Video Category</div>
+                    <div>
+                        <input disabled class="form-control" th:value="${video.categoria.getTitulo()}"
+                               value="Video Synopsis"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

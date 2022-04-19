@@ -23,7 +23,7 @@ import br.com.challange.videos.videos.form.VideoForm;
 import br.com.challange.videos.videos.model.Video;
 import br.com.challange.videos.videos.repository.VideoRepository;
 
-@RestController // pra nao precisar colocar @ResponseBody nos methodos
+@RestController
 @RequestMapping("/videos")
 public class VideoController {
 
@@ -43,7 +43,6 @@ public class VideoController {
     @RequestMapping(params = "titulo", value = "/", method = RequestMethod.GET)
     public List<VideoDto> findByName(@Param("titulo") @RequestParam String titulo) {
         List<Video> findAll = videoRepository.findAll();
-
         List<Video> resultado = new ArrayList<>();
         for (int i = 0; i < findAll.size(); i++) {
             if (findAll.get(i).getTitulo().toLowerCase(Locale.ROOT).contains(titulo.toLowerCase(Locale.ROOT))) {
@@ -100,7 +99,6 @@ public class VideoController {
         return new VideoDto(video);
     }
 
-
     @GetMapping("/free")
     public Page<VideoDto> videosGratis() {
         Sort sort = Sort.by("id").descending();
@@ -111,19 +109,18 @@ public class VideoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<VideoDto> register(@RequestBody @Valid VideoForm videoForm, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<VideoDto> register(@ModelAttribute @Valid VideoForm videoForm, UriComponentsBuilder uriBuilder) {
         Video video = videoForm.converter(categoriaRepository);
         video = videoRepository.save(video);
 
         URI uri = uriBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
         return ResponseEntity.created(uri).body(new VideoDto(video));
-
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<VideoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoVideoForm form) {
-        Video video = form.atualizar(id, videoRepository);
+    public ResponseEntity<VideoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoVideoForm atualizacaoVideoForm) {
+        Video video = atualizacaoVideoForm.atualizar(id, videoRepository);
         return ResponseEntity.ok(new VideoDto(video));
     }
 

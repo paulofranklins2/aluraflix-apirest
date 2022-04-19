@@ -12,15 +12,16 @@ public class Categoria {
     private String titulo;
     private String color;
 
-    public Categoria(){
+    public Categoria() {
 
     }
-    public Categoria(String titulo){
+
+    public Categoria(String titulo) {
         this.titulo = titulo;
 
     }
 
-    public Categoria(String titulo, String color){
+    public Categoria(String titulo, String color) {
         this.titulo = titulo;
         this.color = color;
     }

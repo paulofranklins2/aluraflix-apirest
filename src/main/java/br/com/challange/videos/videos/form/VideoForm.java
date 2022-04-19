@@ -8,8 +8,6 @@ import br.com.challange.videos.videos.model.Video;
 import br.com.challange.videos.videos.repository.CategoriaRepository;
 
 public class VideoForm {
-
-
     @NotEmpty
     @Size(min = 5)
     private String titulo;
@@ -22,7 +20,7 @@ public class VideoForm {
     @Size(min = 5)
     private String url;
 
-    @NotEmpty
+//    @NotEmpty
     private String nomeCategoria;
 
     private String verificarTituloCategoria(String nomeCategoria) {

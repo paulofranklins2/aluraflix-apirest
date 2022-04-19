@@ -74,8 +74,8 @@ public class CategoriaController extends ResponseEntityExceptionHandler {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<CategoriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoCategoriaForm form) {
-        Categoria categoria = form.atualizar(id, categoriaRepository);
+    public ResponseEntity<CategoriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoCategoriaForm atualizacaoCategoriaForm) {
+        Categoria categoria = atualizacaoCategoriaForm.atualizar(id, categoriaRepository);
         return ResponseEntity.ok(new CategoriaDto(categoria));
     }
 

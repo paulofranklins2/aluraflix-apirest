@@ -50,4 +50,12 @@ public class AtualizacaoVideoForm {
         video.setUrl(this.url);
         return video;
     }
+
+    public Video updateVideoForm(String titulo, VideoRepository videoRepository) {
+        Video video = videoRepository.findByTitulo(titulo);
+        video.setTitulo(this.titulo);
+        video.setDescricao(this.descricao);
+        video.setUrl(this.url);
+        return video;
+    }
 }

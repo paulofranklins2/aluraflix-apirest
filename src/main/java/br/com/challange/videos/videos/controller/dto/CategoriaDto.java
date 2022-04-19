@@ -11,7 +11,6 @@ public class CategoriaDto {
     private String titulo;
     private String color;
 
-
     public Long getId() {
         return id;
     }
@@ -33,6 +32,7 @@ public class CategoriaDto {
     public static List<CategoriaDto> converter(List<Categoria> categoriasList) {
         return categoriasList.stream().map(CategoriaDto::new).collect(Collectors.toList());
     }
+
     public static Page<CategoriaDto> converterToCategoriasDtoPage(Page<Categoria> categorias) {
         return categorias.map(CategoriaDto::new);
     }

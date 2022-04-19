@@ -12,11 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -40,7 +39,7 @@ public class UserController {
         return "/user/new";
     }
 
-    @PostMapping("/novo")
+    @PostMapping("/new")
     public String novo(@Valid VideoForm videoForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/user/new";
@@ -71,26 +70,27 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateVideo(@Valid CheckigForm checkigForm, BindingResult bindingResult, Model model) {
+    public String updateVideo(@Valid CheckigForm checkigForm, BindingResult bindingResult) {
+//        System.out.println(videoRepository.getById(checkigForm.getId()));
         if (bindingResult.hasErrors()) {
             return "/user/update";
         }
-        model.addAttribute("id", checkigForm.getId());
-        return "/user/updateVideo/";
+        return "redirect:/user/updatevideo/?id=" + checkigForm.getId();
     }
 
     @GetMapping("/updatevideo")
-    public String updateVideo(@Valid AtualizacaoVideoForm atualizacaoVideoForm) {
+    public String updateVideo(AtualizacaoVideoForm atualizacaoVideoForm) {
         return "/user/updatevideo";
     }
 
-//    @PutMapping("/updateVideo/")
-//    public String updateSaving(@Valid AtualizacaoVideoForm atualizacaoVideoForm, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "/user/update";
-//        }
-////        Video video = atualizacaoVideoForm.atualizar(id, videoRepository);
-//        return "redirect:/home";
-//    }
+    @PutMapping("/updatevideo/{id}")
+    public String updateSaving(@PathVariable Long id, @Valid AtualizacaoVideoForm atualizacaoVideoForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/user/update";
+        }
+        Video video = atualizacaoVideoForm.atualizar(id, videoRepository);
+        video = videoRepository.save(video);
+        return "/home";
+    }
 
 }

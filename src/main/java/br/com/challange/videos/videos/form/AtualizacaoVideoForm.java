@@ -1,5 +1,6 @@
 package br.com.challange.videos.videos.form;
 
+import br.com.challange.videos.videos.model.Categoria;
 import br.com.challange.videos.videos.model.Video;
 import br.com.challange.videos.videos.repository.VideoRepository;
 
@@ -18,6 +19,15 @@ public class AtualizacaoVideoForm {
     @Size(min = 5)
     private String url;
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -44,18 +54,18 @@ public class AtualizacaoVideoForm {
     }
 
     public Video atualizar(Long id, VideoRepository videoRepository) {
-        Video video = videoRepository.getOne(id);
+        Video video = videoRepository.getById(id);
         video.setTitulo(this.titulo);
         video.setDescricao(this.descricao);
         video.setUrl(this.url);
         return video;
     }
 
-    public Video updateVideoForm(String titulo, VideoRepository videoRepository) {
-        Video video = videoRepository.findByTitulo(titulo);
-        video.setTitulo(this.titulo);
-        video.setDescricao(this.descricao);
-        video.setUrl(this.url);
-        return video;
-    }
+//    public Video updateVideoForm(String titulo, VideoRepository videoRepository) {
+//        Video video = videoRepository.findByTitulo(titulo);
+//        video.setTitulo(this.titulo);
+//        video.setDescricao(this.descricao);
+//        video.setUrl(this.url);
+//        return video;
+//    }
 }

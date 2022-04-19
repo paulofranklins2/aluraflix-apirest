@@ -1,6 +1,5 @@
 package br.com.challange.videos.videos.form;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class CheckigForm {

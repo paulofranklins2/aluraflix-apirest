@@ -20,7 +20,6 @@ public class VideoForm {
     @Size(min = 5)
     private String url;
 
-//    @NotEmpty
     private String nomeCategoria;
 
     private String verificarTituloCategoria(String nomeCategoria) {

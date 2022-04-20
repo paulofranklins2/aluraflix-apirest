@@ -19,6 +19,7 @@ public class AtualizacaoVideoForm {
     @Size(min = 5)
     private String url;
 
+    private String nomeCategoria;
     private Long id;
 
     public Long getId() {

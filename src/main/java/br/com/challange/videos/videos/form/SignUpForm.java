@@ -1,17 +1,26 @@
-package br.com.challange.videos.videos.model;
+package br.com.challange.videos.videos.form;
 
 import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class Usuario {
-    @Id
+public class SignUpForm {
+    @NotEmpty
+    @Size(min = 5)
     private String username;
+    @NotEmpty
+    @Size(min = 5)
     private String password;
-    private byte enabled = 1;
 
+    private byte enabled;
+
+    public SignUpForm(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.enabled = 1;
+    }
 
     public String getUsername() {
         return username;
@@ -37,11 +46,8 @@ public class Usuario {
         this.enabled = enabled;
     }
 
-    public Usuario() {
-    }
 
-    public Usuario(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
+
+
+
 }

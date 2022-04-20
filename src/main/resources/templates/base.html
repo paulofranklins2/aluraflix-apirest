@@ -65,12 +65,19 @@
         <div class="logo-container mb-2 p-5 d-flex justify-content-between">
 
             <span class="logo">Videos Manager</span>
-            <span class="login mt-3">
-			<a class="text-light" sec:authorize="!isAuthenticated()" href="/login">Login</a>
+            <div>
+                <span class="login mt-3">
+                <a class="text-light" sec:authorize="!isAuthenticated()" href="/signup">Sign Up</a>
+                </span>
+
+                <span class="login mt-3">
+                <a class="text-light" sec:authorize="!isAuthenticated()" href="/login">Login</a>
 			<a onclick="document.querySelector('#form-login').submit()" class="text-light"
                sec:authorize="isAuthenticated()" href="#">Logout</a>
 			<form id="form-login" th:action="@{/logout}" method="post"></form>
-		</span>
+
+            </span>
+            </div>
         </div>
 
         <div class="mb-2" sec:authorize="isAuthenticated()">
@@ -80,7 +87,6 @@
                     <a class="nav-link" th:href="@{/user/home}">All</a>
                     <a class="nav-link" th:href="@{/user/delete}">Delete</a>
                     <a class="nav-link" th:href="@{/user/update}">Update</a>
-
                 </nav>
                 <a href="/user/new">
                     <button

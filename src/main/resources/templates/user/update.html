@@ -4,7 +4,6 @@
 <body>
 
 <div th:replace="~{base::logo}"></div>
-<!--<div th:replace="~{base::nave}"></div>-->
 <div class="container">
     <div class="card mt-3">
         <form th:action="@{/user/update}" th:object="${checkigForm}" class="card-body" method="POST">
@@ -13,7 +12,7 @@
                 <input th:field="*{id}" th:errorclass="is-invalid" class="form-control"
                        placeholder="id"/>
             </div>
-            <button class="btn btn-primary mt-2" type="submit">Checking ID</button>
+            <button class="btn btn-primary mt-2" type="submit">Submit</button>
         </form>
     </div>
 </div>

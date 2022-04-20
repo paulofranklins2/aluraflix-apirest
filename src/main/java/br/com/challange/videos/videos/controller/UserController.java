@@ -59,10 +59,12 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "/user/delete";
         }
-        videoRepository.deleteById(deleteForm.getId());
-        return "redirect:/home";
+        if (videoRepository.existsById(deleteForm.getId()) != false) {
+            videoRepository.deleteById(deleteForm.getId());
+            return "redirect:/home";
+        }
+        return "/user/delete";
     }
-
 
     @GetMapping("/update")
     public String newVideo(CheckigForm checkigForm) {
@@ -71,11 +73,14 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateVideo(@Valid CheckigForm checkigForm, BindingResult bindingResult) {
-//        System.out.println(videoRepository.getById(checkigForm.getId()));
+
         if (bindingResult.hasErrors()) {
             return "/user/update";
         }
-        return "redirect:/user/updatevideo/?id=" + checkigForm.getId();
+        if (videoRepository.existsById(checkigForm.getId()) != false) {
+            return "redirect:/user/updatevideo/?id=" + checkigForm.getId();
+        }
+        return "/user/update";
     }
 
     @GetMapping("/updatevideo")
@@ -83,14 +88,14 @@ public class UserController {
         return "/user/updatevideo";
     }
 
-    @PutMapping("/updatevideo/{id}")
+    @PostMapping("/updatevideo/{id}")
     public String updateSaving(@PathVariable Long id, @Valid AtualizacaoVideoForm atualizacaoVideoForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/user/update";
         }
         Video video = atualizacaoVideoForm.atualizar(id, videoRepository);
         video = videoRepository.save(video);
-        return "/home";
+        return "redirect:/home";
     }
 
 }

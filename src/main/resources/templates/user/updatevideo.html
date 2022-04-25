@@ -32,6 +32,21 @@
                        placeholder="url"/>
             </div>
 
+            <div class="form-group">
+                <label for="url">Category</label>
+                <div class="dropdown mt-1">
+                    <select class="btn btn-info btn-sm dropdown-toggle" th:field="*{nomeCategoria}">
+                        <option th:value="'LIVRE'" th:text="'LIVRE'"></option>
+                        <option th:value="'Pancadaria Franca'" th:text="'Pancadaria Franca'"></option>
+                        <option th:value="'Putas Feias'" th:text="'Putas Feias'"></option>
+                        <option th:value="'Perdido Igual Cego Em Tiroteiro'"
+                                th:text="'Perdido Igual Cego Em Tiroteiro'"></option>
+                        <option th:value="'Burro Master'" th:text="'Burro Master'"></option>
+                        <option th:value="'TESTANDO'" th:text="'TESTANDO'"></option>
+                    </select>
+                </div>
+            </div>
+
             <button class="btn btn-primary mt-2" type="submit">Submit</button>
         </form>
 

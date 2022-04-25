@@ -59,7 +59,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "/user/delete";
         }
-        if (videoRepository.existsById(deleteForm.getId()) != false) {
+        if (videoRepository.existsById(deleteForm.getId())) {
             videoRepository.deleteById(deleteForm.getId());
             return "redirect:/home";
         }
